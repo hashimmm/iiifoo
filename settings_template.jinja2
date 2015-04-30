@@ -1,0 +1,37 @@
+"""IIIFOO settings; generated via populate_settings.py.
+
+Values for settings are always returned as strings; convert as needed.
+
+Within the application code, all settings are accessed as the setting name.
+However, to override them as environment variables, use uppercase names.
+(eg. `export SERVER_PORT=55555` as opposed to export server_port=55555)
+
+Trailing or leading whitespace in a setting value is always stripped.
+
+Note: For boolean settings, simply check for truthiness of value; set the value
+ to an empty string, "", to make it False, or anything else, eg. "t", to make it
+ evaluate to True. (Not " ", though, since whitespace is stripped.)
+"""
+import os
+
+ENV_VAR_DEFAULTS = {
+{% for k, v in settings_from_env.items() %}{% if not loop.first %}
+{% endif %}    "{{k}}": "{{v}}"{% if not loop.last %},{%endif%}{% endfor %}
+}
+
+
+def get(name):
+    """Get configuration value.
+
+    :param name: Name of configuration parameter of which a value is required.
+    :returns: str - value of configuration parameter.
+    """
+    if not name in ENV_VAR_DEFAULTS:
+        raise ValueError(
+            "'{}' is not a valid configuration variable. Check the name. "
+            "If this error appears after a project update/rebuild, try "
+            "running `python populate_settings.py` again. ".format(name)
+        )
+    else:
+        return os.environ.get(name, ENV_VAR_DEFAULTS[name]).strip()
+

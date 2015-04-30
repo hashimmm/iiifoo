@@ -1,0 +1,41 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="iiif">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="collection" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="title" minOccurs="0" maxOccurs="1"/>
+              <xs:element type="xs:anyURI" name="url" minOccurs="0" maxOccurs="1"/>
+              <xs:element type="xs:anyURI" name="viewer" minOccurs="0" maxOccurs="1"/>
+              <xs:element name="manifest" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:anyURI">
+                      <xs:attribute type="xs:string" name="apiVer" use="required"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="images" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="image" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:anyURI">
+                            <xs:attribute type="xs:string" name="apiVer" use="required"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

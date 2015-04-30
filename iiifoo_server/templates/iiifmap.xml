@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iiif xmlns="{{url_for('static', filename='iiifmap/v0.1.xsd')}}">
+    {% for url, imageurls in urls %}
+    <collection>
+        <manifest apiVer="1.0">{{url}}</manifest>
+        <images>
+            {% for imageurl in imageurls %}
+            <image apiVer="1.1">{{imageurl}}</image>
+            {% endfor %}
+        </images>
+    </collection>
+    {% endfor %}
+</iiif>

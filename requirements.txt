@@ -1,0 +1,17 @@
+Flask>=0.10.1
+Jinja2>=2.7.3
+SQLAlchemy>=0.9.4
+mock>=1.0.1
+simplejson>=3.3.0
+behave>=1.2.4
+jsonschema>=2.3.0
+psycopg2>=2.5.2
+Flask-SQLAlchemy>=1.0
+redis>=2.10.3
+requests>=2.3.0
+Werkzeug>=0.9.6
+gevent>=1.0.1
+setproctitle>=1.1.8
+lxml>=3.4.1
+psycopg2>=2.5.4
+python-crontab>=1.9.3

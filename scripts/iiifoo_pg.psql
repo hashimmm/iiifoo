@@ -1,0 +1,3 @@
+create user iiifoo with password 'iiifoo';
+alter user iiifoo login;
+create database iiifoo with owner iiifoo;
