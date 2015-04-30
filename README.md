@@ -210,20 +210,22 @@ This project comes with a helpful predefined source that can be used out of the
  images served by IIIF Image API compatible image servers.
 For example, to add an image from the Stanford repository to a manifest:
 
-```curl -X POST -d '{"images": [{"id":"qm670kv1873%2FW168_000002_300", "name": "foobar!"}], "iiif_image_server_url": "https://sul-stacks.stanford.edu/image/iiif/", "manifest_id": "fooOfBar"}' -H "Content-Type: application/json" localhost:5678/author/iiifsource_v0_1a```
+`curl -X POST -d '{"images": [{"id":"qm670kv1873%2FW168_000002_300", "name": "foobar!"}], "iiif_image_server_url": "https://sul-stacks.stanford.edu/image/iiif/", "manifest_id": "fooOfBar"}' -H "Content-Type: application/json" localhost:5678/author/iiifsource_v0_1a`
 
 The above adds an image labelled "foobar\!" to a manifest with id fooOfBar 
  and creates it if necessary.
 The manifest may be retrieved with:
-```http://localhost:5678/iiif/iiifsource_v0_1a/https%3A%252F%252Fsul-stacks.stanford.edu%252Fimage%252Fiiif%252F/fooOfBar/manifest```
+
+`http://localhost:5678/iiif/iiifsource_v0_1a/https%3A%252F%252Fsul-stacks.stanford.edu%252Fimage%252Fiiif%252F/fooOfBar/manifest`
 
 To open it up in the demo Mirador 2 viewer:
-```http://localhost:5678/viewer/iiifsource_v0_1a?iiif_image_server_url=https%3A%2F%2Fsul-stacks.stanford.edu%2Fimage%2Fiiif%2F&manifest_id=fooOfBar```
+`http://localhost:5678/viewer/iiifsource_v0_1a?iiif_image_server_url=https%3A%2F%2Fsul-stacks.stanford.edu%2Fimage%2Fiiif%2F&manifest_id=fooOfBar`
 
 ## Misc #
 I had some library version issues because of an old OS installation which is why
  I had to specify it in the lines below. In that case, this is how I ended up 
  having to run this for debugging:
+
 `PYTHONPATH=$(pwd) DYLD_LIBRARY_PATH=/Library/PostgreSQL/9.3/lib
  db_port=5434 python start_mira_server.py`
 
