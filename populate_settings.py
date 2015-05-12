@@ -56,18 +56,22 @@ ENV_VAR_DEFAULTS = {
     # directories, paths, locations
     "logs_dir": '',
     "pids_dir": '',
-    # redis
+    # redis  --  for when cache_type is redis
     "redis_port": "6379",
     "redis_host": "localhost",
     "redis_cache_key_prefix": "iiifoo-cache",
     "redis_db": "0",
     "redis_pw": "",
     "redis_cache_default_timeout": "86400",
-    # file cache
+    # file cache  --  for when cache_type is file
     "file_cache_dir": 'file_cache',
     "file_cache_threshold": '500',
     "file_cache_default_timeout": '86400',
     "file_cache_file_mode": '384',
+    # memcached  --  for when cache_type is memcached
+    "memcached_servers": "127.0.0.1:11211",
+    "memcached_default_timeout": "86400",
+    "memcached_key_prefix": "iiifoo-cache"
 }
 
 

@@ -1,12 +1,14 @@
 from functools import wraps
-from werkzeug.contrib.cache import RedisCache, SimpleCache, FileSystemCache
+from werkzeug.contrib.cache import (RedisCache, SimpleCache,
+                                    FileSystemCache, MemcachedCache)
 import settings
 
 
 cache_class_map = {
     "redis": RedisCache,
     "memory": SimpleCache,
-    "file": FileSystemCache
+    "file": FileSystemCache,
+    "memcached": MemcachedCache
 }
 
 cache_type_name = settings.get("cache_type").lower()
@@ -34,6 +36,18 @@ elif cache_type_name == "file":
         'default_timeout': settings.get("file_cache_default_timeout"),
         'mode': int(settings.get("file_cache_file_mode"))
     }
+
+elif cache_type_name == "memcached":
+    servers = (x.strip() for x in settings.get("memcached_servers").split(","))
+    cache_options = {
+        'servers': servers,
+        'default_timeout': settings.get('memcached_default_timeout'),
+        'key_prefix': settings.get('memcached_key_prefix')
+    }
+
+else:
+    raise ValueError("Cache type must be one of file, redis, memcached "
+                     "or memory.")
 
 cache = cache_type(**cache_options)
 

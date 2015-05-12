@@ -61,7 +61,7 @@ If postgresql will be used as the database, that will need to be installed too:
 Otherwise, SQLite may be used instead.
 
 For caching, the application can use Redis (but this may be skipped as a file
- cache may be used instead):
+ cache or memcached may be used instead):
 ```bash
 wget http://download.redis.io/redis-stable.tar.gz
 tar xvzf redis-stable.tar.gz
@@ -136,8 +136,8 @@ The configuration parameters are lowercase in "settings.py", __but are expected
  _Default: ""_
 - __test\_debug\_on\_fail__: Enter debugging mode when a test fails. Leave blank 
  for false, any non-blank value is treated as truthy. _Default: ""_
-- __cache\_type__: Cache type. Can be "redis", "file", or "memory". "Memory" is
- only recommended for single-process development environments. _Default: "file"_
+- __cache\_type__: Cache type. Can be "redis", "file", "memcached" or "memory".
+ "Memory" is only recommended for single-process development environments. _Default: "file"_
 - __server\_port__: Port to run the server on. _Default: "5678"_
 - __db\_dialect__: Database type. _Default: "postgresql"_
 - __db\_pass__: Database password. _Default: "iiifoo"_
@@ -158,6 +158,11 @@ The configuration parameters are lowercase in "settings.py", __but are expected
 - __file\_cache\_default_timeout__: Amount of time to keep cached items before
  expiry. _Default: "86400"_
 - __file\_cache\_file_mode__: File mode. Default 0600. _Default: "384"_
+- __memcached\_default_timeout__: Amount of time to keep cached items before
+ expiry. _Default: "86400"_
+- __memcached\_key\_prefix__: Memcached cache key prefix. _Default: "iiifoo-cache"_
+- __memcached\_servers__: Comma-separated list of memcached servers. 
+ _Default: "127.0.0.1:11211"_
 
 
 ### Starting #
