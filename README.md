@@ -145,12 +145,12 @@ The configuration parameters are lowercase in "settings.py", __but are expected
 - __db\_host__: Database host. _Default: "localhost"_
 - __db\_name__: Database name. _Default: "iiifoo"_
 - __db\_port__: Database port. _Default: "5432"_
-- __redis_port__: Redis server port. _Default: "6379"_
-- __redis_host__: Redis server host. _Default: "localhost"_
-- __redis_cache_key_prefix__: Redis cache key prefix. _Default: "iiifoo-cache"_
-- __redis_db__: Redis database number. _Default: "0"_
-- __redis_pw__: Redis password. _Default: ""_
-- __redis_cache_default_timeout__: Redis default cache timeout. _Default: "86400"_
+- __redis\_port__: Redis server port. _Default: "6379"_
+- __redis\_host__: Redis server host. _Default: "localhost"_
+- __redis\_cache\_key\_prefix__: Redis cache key prefix. _Default: "iiifoo-cache"_
+- __redis\_db__: Redis database number. _Default: "0"_
+- __redis\_pw__: Redis password. _Default: ""_
+- __redis\_cache\_default\_timeout__: Redis default cache timeout. _Default: "86400"_
 - __file\_cache\_dir__: Directory to store the file cache. Make sure it doesn't
  store anything else. _Default: "file_cache"_
 - __file\_cache\_threshold__: Number of items to cache before starting to remove
