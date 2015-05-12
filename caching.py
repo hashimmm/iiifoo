@@ -1,3 +1,4 @@
+import os
 from functools import wraps
 from werkzeug.contrib.cache import (RedisCache, SimpleCache,
                                     FileSystemCache, MemcachedCache)
@@ -30,8 +31,11 @@ elif cache_type_name == "memory":
     cache_options = {}
 
 elif cache_type_name == "file":
+    cache_dir = settings.get("file_cache_dir")
+    if not os.path.isdir(cache_dir):
+        os.mkdir(cache_dir)
     cache_options = {
-        'cache_dir': settings.get("file_cache_dir"),
+        'cache_dir': cache_dir,
         'threshold': settings.get("file_cache_threshold"),
         'default_timeout': settings.get("file_cache_default_timeout"),
         'mode': int(settings.get("file_cache_file_mode"))
