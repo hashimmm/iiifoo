@@ -72,34 +72,32 @@ def _annotation_list_obj(annotation_list_url, canvas_url,
     annotation_list['@id'] = annotation_list_url
     annotation_list['@type'] = "sc:AnnotationList"
     annotation_list['resources'] = [
-                                       {
-                                           "@type": "oa:Annotation",
-                                           "motivation": "sc:painting",
-                                           "resource": {
-                                               "@type": "cnt:ContentAsText",
-                                               "chars": transcription['text'],
-                                               "format": "text/plain",
-                                               "language": transcription[
-                                                   'language_code']},
-                                           "on": "{}{}".format(canvas_url,
-                                                               _get_bounds(
-                                                                   transcription))
-                                       }
-                                       for transcription in transcriptions
-                                   ] + [
-                                       {
-                                           "@type": "oa:Annotation",
-                                           "motivation": "oa:commenting",
-                                           "resource": {"@type": "dctypes:Text",
-                                                        "chars": comment[
-                                                            'text'],
-                                                        "format": "text/plain"},
-                                           "on": "{}{}".format(canvas_url,
-                                                               _get_bounds(
-                                                                   comment))
-                                       }
-                                       for comment in comments
-                                   ]
+       {
+           "@type": "oa:Annotation",
+           "motivation": "sc:painting",
+           "resource": {
+               "@type": "cnt:ContentAsText",
+               "chars": transcription['text'],
+               "format": "text/plain",
+               "language": transcription[
+                   'language_code']},
+           "on": "{}{}".format(canvas_url, _get_bounds(transcription))
+       }
+       for transcription in transcriptions
+    ] + [
+       {
+           "@type": "oa:Annotation",
+           "motivation": "oa:commenting",
+           "resource": {"@type": "dctypes:Text",
+                        "chars": comment[
+                            'text'],
+                        "format": "text/plain"},
+           "on": "{}{}".format(canvas_url,
+                               _get_bounds(
+                                   comment))
+       }
+       for comment in comments
+    ]
     return annotation_list
 
 
