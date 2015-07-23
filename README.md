@@ -124,9 +124,8 @@ The configuration parameters are lowercase in "settings.py", __but are expected
  set the required configuration environment variables and run 
  `python populate_settings.py`.
 
-- __pids\_dir__ The directory to store pids. _Default: ""_
-- __logs\_dir__: The directory in which to store logs. _Default: ""_
-- __gunicorn\_proc_name__ Process name for gunicorn. *Default: "mira_gunicorn"*
+General:
+- __gunicorn\_proc_name__ Process name for gunicorn. *Default: "iiifoo_gunicorn"*
 - __gunicorn\_loglevel__: Log level for gunicorn (error, warning, debug or info) 
  _Default: "info"_
 - __server\_debug__: Determines whether to run in debug mode. Does not affect 
@@ -139,12 +138,23 @@ The configuration parameters are lowercase in "settings.py", __but are expected
 - __cache\_type__: Cache type. Can be "redis", "file", "memcached" or "memory".
  "Memory" is only recommended for single-process development environments. _Default: "file"_
 - __server\_port__: Port to run the server on. _Default: "5678"_
+- __server\_processes__: Number of gunicorn processes. _Default: "4"_
+- __secret\_key__: Randomly generated secret key for application crypto.
+
+Directories/paths/locations:
+- __pids\_dir__ The directory to store pids. _Default: ""_
+- __logs\_dir__: The directory in which to store logs. _Default: ""_
+- __server\_path__: Complete URL to application. _Default: "http://localhost:5678"_
+
+Database:
 - __db\_dialect__: Database type. _Default: "postgresql"_
 - __db\_pass__: Database password. _Default: "iiifoo"_
 - __db\_user__: Database user. _Default: "iiifoo"_
 - __db\_host__: Database host. _Default: "localhost"_
 - __db\_name__: Database name. _Default: "iiifoo"_
 - __db\_port__: Database port. _Default: "5432"_
+
+Cache:
 - __redis\_port__: Redis server port. _Default: "6379"_
 - __redis\_host__: Redis server host. _Default: "localhost"_
 - __redis\_cache\_key\_prefix__: Redis cache key prefix. _Default: "iiifoo-cache"_
@@ -167,7 +177,7 @@ The configuration parameters are lowercase in "settings.py", __but are expected
 
 ### Starting #
 Normally, all you have to do to start iiifoo is:
-`./start_mira_gunicorn.sh`
+`./start_iiifoo_gunicorn.sh`
 
 ### Stopping #
 To stop:
@@ -184,7 +194,7 @@ To run tests, simply navigate to project root and run:
 
 (`-wip` skips scenarios tagged as wip, i.e. work in progress.)
 
-To generate junit-style test results, add:
+To generate junit-style test results, add the following to the above command:
  `--junit --junit-directory=test_results_junit`
 
 

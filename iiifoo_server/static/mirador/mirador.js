@@ -7941,6 +7941,7 @@ window.Mirador = window.Mirador || function(config) {
     },
 
     addLinksToUris: function(text) {
+      if (text.indexOf("<a") > -1) return text;
       // http://stackoverflow.com/questions/8188645/javascript-regex-to-match-a-url-in-a-field-of-text
       var regexUrl = /(http|ftp|https):\/\/[\w\-]+(\.[\w\-]+)+([\w.,@?\^=%&amp;:\/~+#\-]*[\w@?\^=%&amp;\/~+#\-])?/gi,
           textWithLinks = text,

@@ -30,7 +30,7 @@ class AuthoringAPI(MethodView):
         Action is determined by the value of the 'action' key in the request
         body. Request body is expected to be JSON.
         """
-        params = request.get_json()
+        params = request.get_json(force=True, silent=True) or request.values
         action = params.get('action', 'export').lower()
         if not action or action == 'export':
             resp = self._export_image(params, source_type)
@@ -49,7 +49,7 @@ class AuthoringAPI(MethodView):
 
         Options specified in request body (which has to be JSON).
         """
-        params = request.get_json()
+        params = request.get_json(force=True, silent=True) or request.values
         return self._delete_image(params, source_type)
 
     def put(self, source_type):
@@ -57,7 +57,7 @@ class AuthoringAPI(MethodView):
 
         Options specified in request body (which has to be JSON).
         """
-        params = request.get_json()
+        params = request.get_json(force=True, silent=True) or request.values
         return self._export_image(params, source_type)
 
     @staticmethod
