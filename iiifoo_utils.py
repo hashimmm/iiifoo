@@ -5,6 +5,7 @@ from urllib import unquote, quote
 from functools import update_wrapper
 
 import requests
+import validators
 import requests.exceptions
 try:
     from crontab import CronTab
@@ -15,6 +16,7 @@ from flask import make_response, request, current_app
 import settings
 import exception
 from caching import cached
+from external_interfaces.iiif_interface import IIFInterface
 
 
 # from http://flask.pocoo.org/snippets/56/
@@ -261,3 +263,22 @@ def write_iiifoo_crons(jobsmap):
         jobsmap[newk] = jobsmap[k]
         del jobsmap[k]
     write_crons(jobsmap=jobsmap)
+
+
+def get_context_and_profile_for_iiif_url(iiif_url):
+    """Given a IIIF base URL, gets the @context and profile.
+
+    This is done by calling info.json on the IIIF URL provided.
+    :param iiif_url: The IIIF base URL.
+    """
+    info = IIFInterface.get_info(iiif_url)
+    profile = []
+    for item in info.get("profile", []):
+        if validators.url(item):
+            profile.append(item)
+            break
+    return {
+        "@context": info.get("@context",
+                             "http://iiif.io/api/image/2/context.json"),
+        "profile": profile
+    }
