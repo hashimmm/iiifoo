@@ -2,10 +2,10 @@ import os
 import logging
 
 import simplejson
-# from jinja2 import Environment, FileSystemLoader
-
-from iiifoo_utils import image_id_from_canvas_id
-from dbmodels import Manifest, Image  # , UserPermission
+from dbmodels import Manifest, Image
+from iiifoo_utils import (
+    image_id_from_canvas_id, get_context_and_profile_for_iiif_url
+)
 
 
 fh = logging.FileHandler('manifest_ops.log')
@@ -120,7 +120,12 @@ def _canvas_obj(manifest_url,
         image_anno_url = canvas_id.replace('/canvas/', '/annotation/')
     else:
         raise ValueError("must provide one of manifest_url or url_root")
-    resource_url = "{}/full/full/0/native.jpg".format(image_path)
+    context_and_profile = get_context_and_profile_for_iiif_url(image_path)
+    if "http://iiif.io/api/image/2/context.json" ==\
+            context_and_profile.get("@context"):
+        resource_url = "{}/full/full/0/default.jpg".format(image_path)
+    else:
+        resource_url = "{}/full/full/0/native.jpg".format(image_path)
     resource = {
         "@id": resource_url,
         "@type": "dctypes:Image",
@@ -128,7 +133,9 @@ def _canvas_obj(manifest_url,
         "height": height,
         "width": width,
         "service": {
-            "@id": image_path
+            "@id": image_path,
+            "@context": context_and_profile.get("@context"),
+            "profile": context_and_profile.get("profile")
         }
     }
     image = {

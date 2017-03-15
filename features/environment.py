@@ -18,6 +18,7 @@ import settings
 import mock_data
 from iiifoo_server import create_app, db
 from external_interfaces import *
+from external_interfaces import iiif_interface
 
 
 dateformat = "%Y-%m-%d_%H-%M-%S"
@@ -97,7 +98,10 @@ settings_patcher = SettingsMocker(db_dialect="sqlite", db_host="", db_user="",
                                   db_pass="", db_port="", db_name=test_db_name,
                                   server_debug="True")
 
-patchers = [settings_patcher]
+iiif_patcher = patch.object(iiif_interface.IIFInterface, 'get_info',
+                            return_value=mock_data.iiif_info)
+
+patchers = [settings_patcher, iiif_patcher]
 
 
 def start_patching():

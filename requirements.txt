@@ -15,3 +15,4 @@ setproctitle>=1.1.8
 lxml>=3.4.1
 psycopg2>=2.5.4
 python-crontab>=1.9.3
+validators>=0.9
